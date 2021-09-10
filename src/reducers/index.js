@@ -1,4 +1,10 @@
-import { ADD_SMURF, SET_ERROR } from "../actions";
+import {
+  FETCH_START,
+  FETCH_SUCCESS,
+  FETCH_FAIL,
+  ADD_SMURF,
+  SET_ERROR,
+} from "../actions";
 
 export const initialState = {
   smurfs: [],
@@ -7,7 +13,25 @@ export const initialState = {
 };
 
 const reducer = (state = initialState, action) => {
+  console.log("in reducer out of case", state, action);
   switch (action.type) {
+    case FETCH_START:
+      return {
+        ...state,
+        isLoading: true,
+      };
+    case FETCH_SUCCESS:
+      return {
+        ...state,
+        smurfs: action.payload,
+        isLoading: false,
+      };
+    case FETCH_FAIL:
+      return {
+        ...state,
+        isLoading: false,
+        error: action.payload,
+      };
     case ADD_SMURF:
       return {
         ...state,
