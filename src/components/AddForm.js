@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { connect } from "react-redux";
-import { addSmurf } from "../actions";
+import { addSmurf, setError } from "../actions";
 
 const AddForm = (props) => {
   const [state, setState] = useState({
@@ -20,12 +20,12 @@ const AddForm = (props) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (state.name === "" || state.position === "" || state.nickname === "") {
-      errorMessage = "Name, position and nickname fields are required.";
+      props.setError("Name, position and nickname fields are required.");
     }
     props.addSmurf(state);
   };
 
-  const errorMessage = "";
+  const { errorMessage } = props;
 
   return (
     <section>
@@ -88,11 +88,11 @@ const AddForm = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    error: state.error,
+    errorMessage: state.errorMessage,
   };
 };
 
-export default connect(mapStateToProps, { addSmurf })(AddForm);
+export default connect(mapStateToProps, { addSmurf, setError })(AddForm);
 
 //Task List:
 //1. Connect the errorMessage, setError and addSmurf actions to the AddForm component.

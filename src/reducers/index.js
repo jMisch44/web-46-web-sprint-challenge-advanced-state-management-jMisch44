@@ -1,9 +1,9 @@
-import { ADD_SMURF } from "../actions";
+import { ADD_SMURF, SET_ERROR } from "../actions";
 
 export const initialState = {
   smurfs: [],
   isLoading: false,
-  error: "",
+  errorMessage: "",
 };
 
 const reducer = (state = initialState, action) => {
@@ -12,6 +12,11 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         smurfs: [...state.smurfs, action.payload],
+      };
+    case SET_ERROR:
+      return {
+        ...state,
+        errorMessage: action.payload,
       };
     default:
       return state;
