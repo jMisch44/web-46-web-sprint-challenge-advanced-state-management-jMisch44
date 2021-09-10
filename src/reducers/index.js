@@ -1,3 +1,4 @@
+import { ADD_SMURF } from "../actions";
 
 export const initialState = {
   smurfs: [],
@@ -6,7 +7,12 @@ export const initialState = {
 };
 
 const reducer = (state = initialState, action) => {
-  switch (action) {
+  switch (action.type) {
+    case ADD_SMURF:
+      return {
+        ...state,
+        smurfs: [...state.smurfs, action.payload],
+      };
     default:
       return state;
   }
