@@ -13,7 +13,6 @@ export const initialState = {
 };
 
 const reducer = (state = initialState, action) => {
-  console.log("in reducer out of case", state, action);
   switch (action.type) {
     case FETCH_START:
       return {
